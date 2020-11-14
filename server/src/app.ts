@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors())
 app.use(todoRoutes)
 
-const uri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@gastro-order.y5kfk.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+const uri: string = `mongodb+srv://gastro-order:J1EqLAq4ZD7HmTOK@gastro-order.y5kfk.mongodb.net/gastro-order?retryWrites=true&w=majority`
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.set("useFindAndModify", false)
 

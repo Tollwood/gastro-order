@@ -64,8 +64,8 @@ stages:
               WebAppName: $(webAppName)
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               RuntimeStack: 'NODE|10.10'
-              StartupCommand: 'npm start'
+              StartupCommand: 'yarn --cwd server start:prod'
               ScriptType: 'Inline Script'
               InlineScript: |
-                yarn install
-                yarn build --if-present
+                yarn  --cwd server install
+                yarn  --cwd server build --if-present

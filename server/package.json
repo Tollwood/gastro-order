@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\""
+    "start": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\"",
+    "start:prod": "node dist/js/app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
