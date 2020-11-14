@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "install:all": "yarn install && yarn --cwd ../client install",
+    "build": "tsc && yarn build:client",
+    "copy:client": "cp -r ../client/build dist/js/public",
+    "build:client": "yarn --cwd ../client build && yarn copy:client",
     "start": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\"",
     "start:prod": "node dist/js/app.js"
   },

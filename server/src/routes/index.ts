@@ -3,12 +3,12 @@ import { getTodos, addTodo, updateTodo, deleteTodo } from "../controllers/todos"
 
 const router: Router = Router()
 
-router.get("/todos", getTodos)
+router.get("/api/todos", getTodos)
 
-router.post("/add-todo", addTodo)
+router.post("/api/add-todo", addTodo)
 
-router.put("/edit-todo/:id", updateTodo)
+router.put("/api/edit-todo/:id", updateTodo)
 
-router.delete("/delete-todo/:id", deleteTodo)
+router.delete("/api/delete-todo/:id", deleteTodo)
 
 export default router

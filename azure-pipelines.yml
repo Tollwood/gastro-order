@@ -67,5 +67,5 @@ stages:
               StartupCommand: 'yarn --cwd server start:prod'
               ScriptType: 'Inline Script'
               InlineScript: |
-                yarn  --cwd server install
+                yarn  --cwd server install:all
                 yarn  --cwd server build --if-present
