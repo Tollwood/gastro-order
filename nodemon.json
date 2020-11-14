@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "gastro-order",
+        "MONGO_PASSWORD": "9hhX1zSOBpIu3FI2",
+        "MONGO_DB": "gastro-order"
+    }
+}
