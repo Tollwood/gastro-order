@@ -6,10 +6,10 @@
   "scripts": {
     "install": "yarn --cwd client install",
     "build": "tsc && yarn build:client",
-    "copy:client": "cp -r client/build dist/js/public",
+    "copy:client": "cp -r client/build dist/public",
     "build:client": "yarn --cwd client build && yarn copy:client",
-    "start:dev": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\"",
-    "start": "node dist/js/app.js"
+    "start:dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "@types/dotenv": "^8.2.0",
