@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+@font-face {
+  font-family: 'Veneer';
+  src: local('Veneer'), url(./fonts/Veneer.ttf) format('truetype');
+}
 
 * {
   margin: 0;
@@ -6,13 +10,19 @@
   box-sizing: border-box;
 }
 body {
-  font-family: "Nunito", sans-serif;
+  
+  font-family: "TheSans-Light",Helvetica,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
-  background: #333;
+  
+  scroll-behavior: smooth;
+  background: #fff;
 }
 
+h1, h2,h3,h4,h5,h6 {
+  font-family: "Veneer","TheSans-Light",Helvetica,sans-serif;
+  color: #ca001b;
+}
 .App {
   max-width: 728px;
   margin: 4rem auto;
@@ -27,13 +37,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #444;
+  background: #f8f8f8;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #333333;
 }
 
 .Card--text h1 {
-  color: #ff9900;
+  color: #00ff15;
 }
 
 .Card--button button {
@@ -59,7 +69,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: #444;
+  background: #f8f8f8;
   margin-bottom: 1rem;
 }
 
@@ -72,7 +82,7 @@ body {
 .Form input {
   background: #f5f6f7;
   padding: 0.5rem 1rem;
-  border: 1px solid #ff9900;
+  border: 1px solid #ced4da;
   border-radius: 10px;
   display: block;
   margin: 0.3rem 1rem 0 0;

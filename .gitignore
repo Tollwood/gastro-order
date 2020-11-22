@@ -4,3 +4,8 @@ node_modules
 nodemon.json
 .env
 dist
+build
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
