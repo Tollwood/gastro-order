@@ -1,28 +1,32 @@
 {
   "name": "gastro-order",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index",
   "license": "MIT",
   "scripts": {
+    "clean": "rm -rf dist build client/build",
     "install": "yarn --cwd client install",
     "build": "tsc && yarn build:client",
     "copy:client": "cp -r client/build build/public",
     "build:client": "yarn --cwd client build && yarn copy:client",
     "start:dev": "concurrently \"tsc -w\" \"nodemon build/app.js\"",
     "start": "node build/app.js",
-    "dist": "sh ./scripts/dist.sh"
+    "dist": "sh ./scripts/dist.sh",
+    "deploy": "eb deploy",
+    "full-deploy": "yarn clean && yarn build && yarn dist && yarn deploy"
   },
   "dependencies": {
-    "@types/dotenv": "^8.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.10.14",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/cors": "^2.8.8",
     "@types/express": "^4.17.9",
-    "@types/mongoose": "^5.10.0",
+    "@types/mongoose": "^5.10.1",
     "@types/node": "^14.14.7",
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
