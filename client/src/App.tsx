@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {  createMuiTheme, ThemeProvider } from "@material-ui/core";
 import GuestRegistration from "./components/GuestRegistration";
+import Visits from "./components/Visits";
 
+import {
+  BrowserRouter as Router,
+  Route,
+} from "react-router-dom";
+import CheckInSuccess from "./components/CheckInSuccess";
 const App: React.FC = () => {
   
   const theme = createMuiTheme({
@@ -19,7 +25,21 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
     <main className="App">
-      <GuestRegistration/>
+    <Router>
+      <Route path="/check-in/success" exact>
+        <CheckInSuccess/>
+      </Route>
+      <Route path="/check-in" exact>
+        <GuestRegistration/>
+      </Route>
+      <Route path="/visits" exact>
+        <Visits/>
+      </Route>
+      <Route path="/" exact>
+        <GuestRegistration/>
+      </Route>
+      </Router>
+      
     </main>
     </ThemeProvider>
   );

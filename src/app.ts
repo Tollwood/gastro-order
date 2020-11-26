@@ -29,7 +29,7 @@ mongoose
   .catch(error => {
     throw error
   })
-
+  
 
 // add middlewares
 app.use(express.static(path.join(__dirname, "public")));

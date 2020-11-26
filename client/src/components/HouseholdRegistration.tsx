@@ -1,14 +1,8 @@
 import {  Grid, Paper, TextField } from "@material-ui/core";
 
 import React from "react";
+import { Household } from "../type";
 import useStyles from "../useStyles";
-
-export interface Household {
-  firstName?: string,
-  lastName?: string,
-  phone?:string,
-  guestsCount?: number,
-}
 
 interface Props {
   household: Household,
@@ -16,8 +10,6 @@ interface Props {
   number: number
   onDelete: (index:number) => void
 }
-
-
 
 const HouseholdRegistration: React.FC<Props> = (props:Props)=>{
   const classes = useStyles();

@@ -1,42 +1,49 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Copyright from './Copyright';
-import HouseholdRegistration, { Household } from './HouseholdRegistration';
+import HouseholdRegistration from './HouseholdRegistration';
 import { KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { ReactComponent as Logo } from '../logo.svg';
 import { Paper } from '@material-ui/core';
 import useStyles from '../useStyles';
-
+import {addVisit} from "../API";
+import { Household, Visit } from '../type';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 export default function GuestRegistration() {
   
   const classes = useStyles();
+  const history = useHistory();
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  
+  const query = useQuery();
+  
+  const [households, setHouseholds] = useState<Household[]>([{firstName:"", lastName:"",phone:"",guestsCount:1}])
+  const selectedDate = new Date();
 
-  const [households, setHouseholds] = useState<Household[]>([{}])
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date(),
-  );
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
-
+  
   const onDelete = (number:number) => {
     
     setHouseholds(prev => prev.filter((h,i) => i !== number-1))
   }
 
+  const updateHousehold = (h: Household, i:number) =>{
+      const newHouseHolds = [...households];
+      newHouseHolds[i] = h;
+      setHouseholds(newHouseHolds);
+  }
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
-        <Logo/>
+        <img src={`${process.env.PUBLIC_URL} /logo-demo.svg`}/>
         <Typography component="h1" variant="h5">
           Coronabedingte Gäste-Registrierung
         </Typography>
@@ -55,7 +62,8 @@ export default function GuestRegistration() {
           fullWidth
           format="dd.MM.yyyy"
           value={selectedDate}
-          onChange={handleDateChange}
+          disabled
+          onChange={()=>{}}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
@@ -69,29 +77,18 @@ export default function GuestRegistration() {
           fullWidth
           value={selectedDate}
           ampm={false}
-          onChange={handleDateChange}
+          onChange={()=>{}}
           KeyboardButtonProps={{
             'aria-label': 'change time',
           }}
         />
             </Grid>
             </MuiPickersUtilsProvider>
-            <Grid item xs={12}>
-              <TextField
-                name="tableNum"
-                variant="outlined"
-                required
-                fullWidth
-                id="table-num"
-                label="Tischnummer"
-                autoFocus
-              />
-            </Grid>
             </Grid>
             </Paper>
             </Grid>
 
-              {households.map((h,i) => <HouseholdRegistration key={i} household={h} number={i+1} onChange={uh => console.log(uh)} onDelete={onDelete}/>)}
+              {households.map((h,i) => <HouseholdRegistration key={i} household={h} number={i+1} onChange={uh => updateHousehold(uh,i)} onDelete={onDelete}/>)}
           
           <Grid item xs={12} sm={6}>
           <Button
@@ -110,7 +107,11 @@ export default function GuestRegistration() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={()=>console.log(households)}
+            onClick={()=> {
+              const visit: Visit = {from: selectedDate, households: households, table:query.get("table")|| ""}
+              addVisit(visit).then(()=>history.push("check-in/success")); 
+              
+                        }            }
           >
             Speichern
           </Button>

@@ -1,14 +1,14 @@
 import { Router } from "express"
-import { getTodos, addTodo, updateTodo, deleteTodo } from "../controllers/todos"
+import { getVisits, addVisit } from "../controllers/visits"
 
 const router: Router = Router()
 
-router.get("/api/todos", getTodos)
+router.get("/api/visits", getVisits)
 
-router.post("/api/add-todo", addTodo)
+router.post("/api/visits", addVisit)
 
-router.put("/api/edit-todo/:id", updateTodo)
+// router.put("/api/visits/:id", updateVisit)
 
-router.delete("/api/delete-todo/:id", deleteTodo)
+// router.delete("/api/visits/:id", deleteVisit)
 
 export default router
