@@ -8,6 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import CheckInSuccess from "./components/CheckInSuccess";
+import SignIn from "./components/SignIn";
 const App: React.FC = () => {
   
   const theme = createMuiTheme({
@@ -34,6 +35,9 @@ const App: React.FC = () => {
       </Route>
       <Route path="/visits" exact>
         <Visits/>
+      </Route>
+      <Route path="/signin" exact>
+        <SignIn/>
       </Route>
       <Route path="/" exact>
         <GuestRegistration/>
