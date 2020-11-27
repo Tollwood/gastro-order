@@ -13,12 +13,12 @@ import { Paper } from '@material-ui/core';
 import useStyles from '../useStyles';
 import {addVisit} from "../API";
 import { Household, Visit } from '../type';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import CheckInSuccess from './CheckInSuccess';
 
 export default function GuestRegistration() {
   
   const classes = useStyles();
-  const history = useHistory();
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -26,6 +26,7 @@ export default function GuestRegistration() {
   const query = useQuery();
   
   const [households, setHouseholds] = useState<Household[]>([{firstName:"", lastName:"",phone:"",guestsCount:1}])
+  const [completed,setCompleted] = useState<boolean>(false);
   const selectedDate = new Date();
 
   
@@ -43,10 +44,12 @@ export default function GuestRegistration() {
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
-        <img src={`${process.env.PUBLIC_URL} /logo-demo.svg`}/>
+        <img src={`${process.env.PUBLIC_URL} /logo-demo.svg`} alt="logo"/>
         <Typography component="h1" variant="h5">
           Coronabedingte Gäste-Registrierung
         </Typography>
+        {completed && <CheckInSuccess/>}
+        {!completed &&
         <form className={classes.form} noValidate>
           <Grid container spacing={2} >
             <Grid item xs={12}>
@@ -109,15 +112,17 @@ export default function GuestRegistration() {
             className={classes.submit}
             onClick={()=> {
               const visit: Visit = {from: selectedDate, households: households, table:query.get("table")|| "1"}
-              addVisit(visit).then(()=>history.push("check-in/success")); 
+              addVisit(visit).then(()=>setCompleted(true)); 
               
                         }            }
           >
             Speichern
           </Button>
+          
           </Grid>
           </Grid>
         </form>
+        }
       </div>
       <Box mt={5}>
         <Copyright />

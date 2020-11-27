@@ -11,3 +11,6 @@ build
 !.elasticbeanstalk/*.global.yml
 yarn-error.log
 src/public/**
+
+
+amplify
