@@ -108,7 +108,7 @@ export default function GuestRegistration() {
             color="primary"
             className={classes.submit}
             onClick={()=> {
-              const visit: Visit = {from: selectedDate, households: households, table:query.get("table")|| ""}
+              const visit: Visit = {from: selectedDate, households: households, table:query.get("table")|| "1"}
               addVisit(visit).then(()=>history.push("check-in/success")); 
               
                         }            }
