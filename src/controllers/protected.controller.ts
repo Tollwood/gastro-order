@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 import AuthMiddleware from '../middleware/auth.middleware';
 
 class ProtectedController {
-  public path = '/protected'
+  public path = '/api/protected'
   public router = express.Router()
   private authMiddleware;
 

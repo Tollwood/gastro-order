@@ -1,5 +1,6 @@
 import * as express from 'express'
 import { Request, Response } from 'express'
+import path from 'path'
 
 class HomeController {
     public path = '/'
@@ -10,11 +11,12 @@ class HomeController {
     }
 
     public initRoutes() {
-        this.router.get('/', this.home)
+        this.router.get('/**', this.staticFiles)
     }
 
-    home = (req: Request, res: Response) => {
-      res.send("success")
+    staticFiles = (req: Request, res: Response) => {
+        console.log("serve static file")
+        res.sendFile(path.join(__dirname,"..", "public", "index.html"));
     }
 }
 

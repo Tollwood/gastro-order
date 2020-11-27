@@ -4,7 +4,7 @@ import { body, validationResult } from 'express-validator';
 import Cognito from '../services/cognito.service';
 
 class AuthController {
-    public path = '/auth'
+    public path = '/api/auth'
     public router = express.Router()
 
     constructor() {

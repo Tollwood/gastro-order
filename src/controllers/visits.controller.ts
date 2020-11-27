@@ -6,14 +6,14 @@ import VisitModel from "../schema/Visit"
 
 class VisitsController {
     public router = express.Router()
-    public path = '/'
+    public path = '/api'
     constructor() {
         this.initRoutes()
     }
 
     public initRoutes() {
-        this.router.get("/api/visits", this.getVisits)
-        this.router.post("/api/visits", this.addVisit)
+        this.router.get("/visits", this.getVisits)
+        this.router.post("/visits", this.addVisit)
     }
   
 

@@ -4,10 +4,10 @@
   "main": "build/index",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist build client/build",
+    "clean": "rm -rf dist build client/build src/public/**",
     "install": "yarn --cwd client install",
     "build": "tsc && yarn build:client",
-    "copy:client": "cp -r client/build build/public",
+    "copy:client": "cp -r client/build src/public && cp -r client/build build/public ",
     "build:client": "yarn --cwd client build && yarn copy:client",
     "dev": "nodemon",
     "start": "node build/server.js",
