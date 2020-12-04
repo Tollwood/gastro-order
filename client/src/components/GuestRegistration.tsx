@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Copyright from './Copyright';
 import HouseholdRegistration from './HouseholdRegistration';
-import { KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { DatePicker, TimePicker, LocalizationProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { Paper } from '@material-ui/core';
 import useStyles from '../useStyles';
@@ -15,6 +15,9 @@ import {addVisit} from "../API";
 import { Household, Visit } from '../type';
 import { useLocation } from 'react-router-dom';
 import CheckInSuccess from './CheckInSuccess';
+import DateFnsAdapter from '@material-ui/pickers/adapter/date-fns'; 
+import TextField from '@material-ui/core/TextField/TextField';
+
 
 export default function GuestRegistration() {
   
@@ -27,7 +30,8 @@ export default function GuestRegistration() {
   
   const [households, setHouseholds] = useState<Household[]>([{firstName:"", lastName:"",phone:"",guestsCount:1}])
   const [completed,setCompleted] = useState<boolean>(false);
-  const selectedDate = new Date();
+  const [selectedDate,setSelectedDate] = useState<Date>(new Date());
+  
 
   
   const onDelete = (number:number) => {
@@ -55,38 +59,27 @@ export default function GuestRegistration() {
             <Grid item xs={12}>
             <Paper className={classes.paper}>
             <Grid container spacing={2}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <LocalizationProvider dateAdapter={DateFnsAdapter}>
             
           <Grid item xs={12} sm={6}>
-          <KeyboardDatePicker 
-          margin="normal"
-          id="date-picker-dialog"
+          <DatePicker 
           label="Datum"
-          fullWidth
-          format="dd.MM.yyyy"
           value={selectedDate}
           disabled
+          renderInput={(props) => <TextField {...props} />}
           onChange={()=>{}}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
         />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
+            <TimePicker
           label="Von"
-          fullWidth
           value={selectedDate}
           ampm={false}
-          onChange={()=>{}}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
+          onChange={newDate=> setSelectedDate(newDate || selectedDate)}
+          renderInput={(props) => <TextField {...props} />}
         />
             </Grid>
-            </MuiPickersUtilsProvider>
+            </LocalizationProvider>
             </Grid>
             </Paper>
             </Grid>
@@ -107,6 +100,7 @@ export default function GuestRegistration() {
           <Grid item xs={12} sm={6}>
           <Button
             fullWidth
+            disabled={households.length === 0 }
             variant="contained"
             color="primary"
             className={classes.submit}

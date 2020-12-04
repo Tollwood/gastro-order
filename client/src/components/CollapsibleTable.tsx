@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Household, Visit } from '../type';
+import {format} from "date-fns";
 
 const useRowStyles = makeStyles({
     root: {
@@ -38,10 +39,10 @@ const useRowStyles = makeStyles({
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.from}
+            {format(new Date(row.from),"dd.MM.yyyy")}
           </TableCell>
-          <TableCell align="right">{row.from}</TableCell>
-          <TableCell align="right">{row.to}</TableCell>
+          <TableCell align="right">{format(new Date(row.from),"hh:mm")}</TableCell>
+          <TableCell align="right">{row.to ? format(new Date(row.to),"hh:mm"): "-"}</TableCell>
           <TableCell align="right">{row.households.map(h=> h.guestsCount).reduce((a: number,b: number) => a + b,0)}</TableCell>
           <TableCell align="right">{row.table}</TableCell>
         </TableRow>

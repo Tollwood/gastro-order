@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 
 import { IVisit } from "../types/Visit"
 import VisitModel from "../schema/Visit"
+import {startOfDay,endOfDay} from "date-fns"
 
 class VisitsController {
     public router = express.Router()
@@ -20,8 +21,13 @@ class VisitsController {
      getVisits = async (req: Request, res: Response): Promise<void> => {
         try {
           const tenantId = req.subdomains[0] || "demo";
+          
+          const startDate: Date = new Date(req.query.startDate as string) 
+          const endDate: Date = new Date(req.query.endDate as string) 
+          console.log(`${startDate} - ${endDate}`);
           const Visit = VisitModel.createModel(tenantId)
-          const visits: IVisit[] = await Visit.find()
+          const visits: IVisit[] = await Visit.find( {from: {$gte: startOfDay(startDate),
+            $lte: endOfDay(endDate)}})
           res.status(200).json({content: visits })
         } catch (error) {
           throw error
