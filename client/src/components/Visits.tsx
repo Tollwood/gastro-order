@@ -7,6 +7,9 @@ import { DateRangePicker, DateRange, DateRangeDelimiter, LocalizationProvider } 
 import DateFnsAdapter  from '@material-ui/pickers/adapter/date-fns';
 import {subDays} from "date-fns";
 import { TextField } from "@material-ui/core";
+import VisitorsPdf from "./VisitorsPdf";
+import { PDFViewer,PDFDownloadLink } from '@react-pdf/renderer';
+
 
 const Visists: React.FC = ()=>{
     
@@ -35,7 +38,15 @@ const Visists: React.FC = ()=>{
       )}
     />
     </LocalizationProvider>
+    
       <CollapsibleTable items={visits}/>
+      {/* <PDFViewer width={"100%"} height={"650px"} >
+        <VisitorsPdf visits={visits} />
+      </PDFViewer> */}
+    <PDFDownloadLink document={<VisitorsPdf visits={visits} />}
+                                                 fileName={"Gästeliste.pdf"}>
+                                    {({blob, url, loading, error}) => (loading ? 'Gästeliste wird generiert' : 'Gästeliste herunterladen')}
+    </PDFDownloadLink>
     </div>
     
   )
